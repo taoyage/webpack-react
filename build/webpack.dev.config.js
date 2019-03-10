@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 const config = require('./config');
 
 const baseWebpackConfig = require('./webpack.base.config');
@@ -11,9 +13,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: config.dev.devtool,
   devServer: {
     contentBase: path.join(__dirname, '../dist'),
-    historyApiFallback: {
-      rewrites: [{ from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') }]
-    },
+    historyApiFallback: true,
     host: config.dev.host,
     port: config.dev.port,
     publicPath: config.dev.assetsPublicPath,
@@ -23,8 +23,11 @@ module.exports = merge(baseWebpackConfig, {
     hot: true,
     compress: true,
     quiet: true,
+    // 不在浏览器控制台打印打包信息
+    clientLogLevel: 'none',
     watchOptions: {
-      poll: config.dev.poll
+      poll: config.dev.poll,
+      ignored: /node_modules/
     }
   },
   plugins: [
@@ -32,13 +35,19 @@ module.exports = merge(baseWebpackConfig, {
       'process.env': config.dev.NODE_ENV
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DllReferencePlugin({
+      manifest: require('../dist/dll/lib.manifest.json')
+    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.join('public', 'index.ejs'),
-      // templateParameters: {
-      //   env: process.env.NODE_ENV,
-      //   title: config.dev.title
-      // }
+      templateParameters: {
+        env: process.env.NODE_ENV,
+        title: config.dev.title
+      }
+    }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: []
     })
   ]
 });

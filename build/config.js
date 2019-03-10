@@ -12,6 +12,8 @@ module.exports = {
     port: '3001',
     // 是否自动打开浏览器
     autoOpenBrowser: true,
+    // 是否使用eslint
+    useEslint: true,
     // 是否在浏览器中显示eslint错误提示遮罩层
     showEslintErrorsInOverlay: true,
     // 显示浏览器提示遮罩层

@@ -2,7 +2,6 @@ const path = require('path');
 const config = require('./config');
 const HappyPack = require('happypack');
 const os = require('os');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // 根据系统的内核数量指定线程池个数
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
@@ -13,6 +12,14 @@ const NODE_ENV = process.env.NODE_ENV;
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
 }
+
+const createLintingRule = () => ({
+  test: /\.jsx?$/,
+  exclude: /node_modules/,
+  enforce: 'pre',
+  include: resolve('src'),
+  use: 'happypack/loader?id=eslint'
+});
 
 module.exports = {
   context: resolve('/'),
@@ -29,12 +36,14 @@ module.exports = {
     modules: ['node_modules'],
     alias: {
       '@': resolve('src'),
-      'components': resolve('src/component'),
-      'views': resolve('src/views')
+      components: resolve('src/component'),
+      views: resolve('src/views'),
+      router: resolve('src/router')
     }
   },
   module: {
     rules: [
+      ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -44,6 +53,8 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
+        exclude: /node_modules/,
+        include: resolve('src'),
         options: {
           limit: 10000
         }
@@ -51,6 +62,7 @@ module.exports = {
       {
         test: /\.(sa|sc|c|le)ss$/,
         exclude: /node_modules/,
+        include: resolve('src'),
         use: [
           {
             loader: 'style-loader'
@@ -81,9 +93,21 @@ module.exports = {
     new HappyPack({
       id: 'babel',
       loaders: ['babel-loader?cacheDirectory'],
+      threadPool: happyThreadPool
+    }),
+    new HappyPack({
+      id: 'eslint',
+      loaders: [
+        {
+          loader: 'eslint-loader',
+          options: {
+            formatter: require('eslint-friendly-formatter'),
+            emitWarning: !config.dev.showEslintErrorsInOverlay
+          }
+        }
+      ],
       threadPool: happyThreadPool,
       verbose: true
-    }),
-    new CleanWebpackPlugin()
+    })
   ]
 };
