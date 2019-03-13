@@ -4,6 +4,8 @@ module.exports = {
   dev: {
     // public path
     assetsPublicPath: '/',
+    // 静态文件根目录
+    assetsSubDirectory: 'static',
     // 生成source map
     devtool: 'eval-source-map',
     // 主机名
@@ -28,6 +30,7 @@ module.exports = {
   build: {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsPublicPath: '/',
+    assetsSubDirectory: 'static',
     productionSourceMap: true,
     devtool: 'source-map',
     title: 'demo',
