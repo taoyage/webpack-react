@@ -9,6 +9,7 @@ const config = require('./config');
 const baseWebpackConfig = require('./webpack.base.config');
 
 module.exports = merge(baseWebpackConfig, {
+  entry: ['react-hot-loader/patch', './src/index'],
   mode: 'development',
   devtool: config.dev.devtool,
   devServer: {
@@ -23,8 +24,7 @@ module.exports = merge(baseWebpackConfig, {
     hot: true,
     compress: true,
     quiet: true,
-    // 不在浏览器控制台打印打包信息
-    clientLogLevel: 'none',
+    clientLogLevel: 'none', // 不在浏览器控制台打印打包信息
     watchOptions: {
       poll: config.dev.poll,
       ignored: /node_modules/
