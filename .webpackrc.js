@@ -25,14 +25,15 @@ module.exports = {
     // 代理配置
     proxyTable: {},
     // 可注入的环境变量
-    NODE_ENV: {}
+    NODE_ENV: {},
+    alias: {}
   },
   build: {
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, './dist'),
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
     productionSourceMap: true,
-    devtool: 'source-map',
+    devtool: 'source-map', // source-map
     title: 'demo',
     NODE_ENV: {}
   }

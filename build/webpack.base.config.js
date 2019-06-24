@@ -35,12 +35,7 @@ module.exports = {
   resolve: {
     // 优化模块查找路径
     modules: ['node_modules'],
-    alias: {
-      '@': resolve('src'),
-      components: resolve('src/component'),
-      views: resolve('src/views'),
-      router: resolve('src/router')
-    }
+    alias: config.dev.alias
   },
   module: {
     rules: [
@@ -50,6 +45,10 @@ module.exports = {
         exclude: /node_modules/,
         include: resolve('src'),
         use: 'happypack/loader?id=babel'
+      },
+      {
+        test: /\.html$/,
+        use: ['html-withimg-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
