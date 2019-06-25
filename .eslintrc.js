@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
     es6: true
   },
+  parser: 'babel-eslint',
   extends: ['plugin:react/recommended', 'standard'],
   globals: {
     Atomics: 'readonly',
@@ -13,7 +14,6 @@ module.exports = {
     ecmaFeatures: {
       jsx: true
     },
-    parser: 'babel-eslint',
     ecmaVersion: 2018,
     sourceType: 'module'
   },

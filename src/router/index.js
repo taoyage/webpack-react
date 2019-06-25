@@ -1,14 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Login from 'views/user/login';
-
-const User = () => <div>user2</div>;
+const User = () => <div>user</div>;
 
 const AppRouter = () => (
   <Router>
     <Switch>
-      <Route path="/login" component={Login} />
       <Route path="/user" component={User} />
     </Switch>
   </Router>

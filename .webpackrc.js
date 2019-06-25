@@ -26,7 +26,9 @@ module.exports = {
     proxyTable: {},
     // 可注入的环境变量
     NODE_ENV: {},
-    alias: {}
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   build: {
     assetsRoot: path.resolve(__dirname, './dist'),
