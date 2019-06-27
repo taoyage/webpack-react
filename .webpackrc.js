@@ -11,7 +11,7 @@ module.exports = {
     // 主机名
     host: 'localhost',
     // 端口号
-    port: '3001',
+    port: '3002',
     // 是否自动打开浏览器
     autoOpenBrowser: true,
     // 是否使用eslint
