@@ -10,6 +10,7 @@ module.exports = {
     devtool: 'eval-source-map',
     // 主机名
     host: 'localhost',
+    compress: true,
     // 端口号
     port: '3002',
     // 是否自动打开浏览器
