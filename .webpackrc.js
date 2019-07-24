@@ -18,9 +18,9 @@ module.exports = {
     // 是否使用eslint
     useEslint: true,
     // 是否在浏览器中显示eslint错误提示遮罩层
-    showEslintErrorsInOverlay: true,
-    // 显示浏览器提示遮罩层
-    errorOverlay: true,
+    showEslintErrorsInOverlay: false,
+    // 显示浏览器提示遮罩层（此项如果设置为false，showEslintErrorsInOverlay也设置为false）
+    errorOverlay: false,
     poll: true,
     title: 'demo',
     // 代理配置

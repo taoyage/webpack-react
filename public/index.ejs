@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <title><%= title %></title>
-  </head>
-  <body>
-    <div id="root"></div>
 
-    <% if (env === 'development') { %>
-      <script src="/dll/lib.js"></script>
-    <% } else { %>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <title><%= title %></title>
+</head>
 
-    <% } %>
-  </body>
+<body>
+  <div id="root"></div>
+
+  <% if (env === 'development') { %>
+  <script src="/dll/lib.js"></script>
+  <% } else { %>
+  <script src="/static/js/react.production.min.js?v=<%= version.react %>"></script>
+  <script src="/static/js/react-dom.production.min.js?v=<%= version.reactDom %>"></script>
+  <% } %>
+</body>
+
 </html>

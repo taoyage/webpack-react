@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 
 export default class Accounts extends Component {
   render() {
-    return <div>accounts</div>;
+    return <Button>accounts</Button>;
   }
 }

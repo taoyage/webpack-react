@@ -30,7 +30,10 @@ module.exports = {
   output: {
     filename: '[name].[hash:8].js',
     path: config.build.assetsRoot,
-    publicPath: NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath
+    publicPath:
+      NODE_ENV === 'production'
+        ? config.build.assetsPublicPath
+        : config.dev.assetsPublicPath
   },
   resolve: {
     // 优化模块查找路径
@@ -75,6 +78,25 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+              modifyVars: config.dev.theme
+            }
+          }
+        ],
+        include: resolve('node_modules')
       },
       {
         test: /\.(sa|sc|c|le)ss$/,
