@@ -121,6 +121,12 @@ module.exports = merge(baseWebpackConfig, {
           minChunks: 2,
           maxInitialRequests: 5
         },
+        icon: {
+          test: /@ant-design/,
+          chunks: 'initial',
+          name: 'icon',
+          priority: 100
+        },
         vendor: {
           test: /node_modules/,
           chunks: 'initial',
